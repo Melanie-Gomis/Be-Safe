@@ -7,3 +7,7 @@ keep = ['mois','lum','agg','inter','atm', 'collision', 'adresse',
         'indemne_nb', 'blesseleger_nb', 'hospitalise_nb', 'tue_nb', 'gravite_accident']
 acc.drop(columns=acc.columns.difference(keep), inplace=True)
 print(acc.head())
+
+vic = pd.read_csv("../usagers.csv", sep = ";", index_col=0)
+vic.drop(columns=vic.columns.difference(['Num_victime']), inplace=True)
+print(vic.head())
