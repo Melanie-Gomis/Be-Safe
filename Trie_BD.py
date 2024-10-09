@@ -1,4 +1,9 @@
 import pandas as pd
-acc = pd.read_csv("accidents.csv", sep = ";", index_col=0)
-acc.drop(columns=["date","original_city_code","original_name","geo_score","distance","v1","v2","pr","pr1","vosp","lartpc","larrout","env1","PR_display"], inplace = True)
+acc = pd.read_csv("../accidents.csv", sep = ";", index_col=0)
+keep = ['mois','lum','agg','inter','atm', 'collision', 'adresse',
+        'annee', 'libelle_jour', 'heure', 'current_city_name', 'latitude',
+        'longitude', 'catr', 'surface', 'nom_region', 'has_voiture',
+        'has_deuxrouesmotorises', 'has_velo', 'has_poidslourd', 'has_pietons',
+        'indemne_nb', 'blesseleger_nb', 'hospitalise_nb', 'tue_nb', 'gravite_accident']
+acc.drop(columns=acc.columns.difference(keep), inplace=True)
 print(acc.head())
