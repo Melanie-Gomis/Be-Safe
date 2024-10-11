@@ -14,7 +14,7 @@ acc.to_csv("Accidents.csv", sep=";", index=False)
 
 
 vic = pd.read_csv("../usagers.csv", sep = ";", index_col=0)
-keep2 = ['Num_victime','catu','grav','sexe','an_nais','trajet',]
+keep2 = ['Num_Acc', 'id_usager','catu','grav','sexe','an_nais','trajet',]
 vic.drop(columns = vic.columns.difference(keep2), inplace=True)
 print(vic.head())
 
@@ -22,7 +22,7 @@ vic.to_csv("Victimes.csv", sep=";", index=False)
 
 
 vehic = pd.read_csv("../vehicules.csv", sep = ";", index_col=0)
-keep3 = ['id_vehicule', 'Num_Acc', 'num_veh', 'catv', 'obs', 'obsm', 'motor']
+keep3 = ['Num_Acc', 'id_vehicule', 'Num_Acc', 'num_veh', 'catv', 'obs', 'obsm', 'motor']
 vehic.drop(columns = vehic.columns.difference(keep3), inplace=True)
 print(vehic.head())
 
