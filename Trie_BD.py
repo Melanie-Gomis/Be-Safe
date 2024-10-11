@@ -13,7 +13,7 @@ print(acc.head())
 acc.to_csv("Accidents.csv", sep=";", index=False)
 
 
-vic = pd.read_csv("../usagers.csv", sep = ",", index_col=0)
+vic = pd.read_csv("../usagers.csv", sep = ";", index_col=0)
 keep2 = ['Num_victime','catu','grav','sexe','an_nais','trajet',]
 vic.drop(columns = vic.columns.difference(keep2), inplace=True)
 print(vic.head())
