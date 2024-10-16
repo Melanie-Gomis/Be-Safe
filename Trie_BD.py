@@ -1,5 +1,5 @@
 import pandas as pd
-
+import os
 
 acc = pd.read_csv("../accidents.csv", sep = ";", index_col=0)
 keep1 = ['mois','lum','agg','inter','atm', 'collision', 'adresse',
