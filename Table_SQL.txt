@@ -1,0 +1,61 @@
+-- Table VEHICULE
+CREATE TABLE VEHICULE (
+  id_vehicule INT PRIMARY KEY,
+  num_veh VARCHAR(255),
+  catv VARCHAR(50),
+  obs TEXT,
+  obsm TEXT,
+  motor VARCHAR(50)
+);
+
+-- Table VICTIME
+CREATE TABLE VICTIME (
+  id_usager INT PRIMARY KEY,
+  catu VARCHAR(50),
+  grav VARCHAR(50),
+  sexe CHAR(1),
+  an_nais INT,
+  trajet VARCHAR(255)
+);
+
+-- Table ACCIDENT
+CREATE TABLE ACCIDENT (
+  Num_Acc INT PRIMARY KEY,
+  mois INT,
+  lum VARCHAR(50),
+  agg VARCHAR(50),
+  intersec VARCHAR(50),
+  atm VARCHAR(50),
+  col VARCHAR(50),
+  adr TEXT,
+  ANNEE INT,
+  dep VARCHAR(5),
+  LIBELLE_JOUR VARCHAR(50),
+  HEURE TIME,
+  current_name VARCHAR(255),
+  latitude DECIMAL(10, 8),
+  longitude DECIMAL(11, 8),
+  catr VARCHAR(50),
+  surf VARCHAR(50),
+  NOM_REG VARCHAR(255),
+  has_voiture BOOLEAN,
+  deuxrouesmotorises_nb INT,
+  has_velo BOOLEAN,
+  has_poidslourd BOOLEAN,
+  has_pietons BOOLEAN,
+  indemne_nb INT,
+  blesseleger_nb INT,
+  hospitalise_nb INT,
+  tue_nb INT,
+  gravite_accident VARCHAR(50)
+);
+
+-- Table associative FAIRE
+CREATE TABLE FAIRE (
+  id_vehicule INT,
+  id_usager INT,
+  Num_Acc INT,
+  FOREIGN KEY (id_vehicule) REFERENCES VEHICULE(id_vehicule),
+  FOREIGN KEY (id_usager) REFERENCES VICTIME(id_usager),
+  FOREIGN KEY (Num_Acc) REFERENCES ACCIDENT(Num_Acc)
+);
