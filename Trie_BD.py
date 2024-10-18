@@ -9,7 +9,7 @@ acc = pd.read_csv("accidents.csv", sep = ";", index_col=0, low_memory=False)
 keep1 = ['Num_Acc','mois','lum','agg','int','atm', 'col', 'adr',
         'ANNEE','dep', 'LIBELLE_JOUR', 'HEURE', 'current_name', 'latitude',
         'longitude', 'catr', 'surf', 'NOM_REG','has_voiture',
-        'deuxrouesmotorises_nb', 'has_poidslourd', 'has_pietons', 'has_velo', 
+        'deuxrouesmotorises_nb', 'has_poidslourd', 'has_pietons', 'has_velo',
         'indemne_nb', 'blesseleger_nb', 'hospitalise_nb', 'tue_nb',
          'gravite_accident']
 acc.drop(columns = acc.columns.difference(keep1), inplace=True)
@@ -20,7 +20,7 @@ acc = acc.loc[acc['ANNEE'].isin(keep_years)]
 
 metroploe =['Grand Est', 'Provence-Alpes-Côte d\'Azur', 'Auvergne-Rhône-Alpes',
             'Île-de-France', 'Corse', 'Pays de la Loire', 'Centre-Val de Loire',
-            'Normandie', 'Hauts-de-France', 'Occitanie', 'Bretagne', 
+            'Normandie', 'Hauts-de-France', 'Occitanie', 'Bretagne',
             'Nouvelle-Aquitaine', 'Bourgogne-Franche-Comté']
 acc = acc.loc[acc['NOM_REG'].isin(metroploe)]
 
