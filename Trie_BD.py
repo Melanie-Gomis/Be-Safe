@@ -40,18 +40,20 @@ acc.to_csv("../Fichier/Accidents.csv", sep=";")
 
 
 ### VIC -----
-vic = pd.read_csv("usagers.csv", sep = ";", index_col=0)
+vic = pd.read_csv("usagers.csv", sep = ",", index_col=0)
 keep2 = ['Num_Acc', 'id_usager','catu','grav','sexe','an_nais','trajet',]
 vic.drop(columns = vic.columns.difference(keep2), inplace=True)
+vic = vic.fillna('NULL')
 print(vic.head())
 
 vic.to_csv("../Fichier/Victimes.csv", sep=";")
 
 
 ### VEHIC -----
-vehic = pd.read_csv("vehicules.csv", sep = ";", index_col=0)
+vehic = pd.read_csv("vehicules.csv", sep = ",", index_col=0)
 keep3 = ['Num_Acc', 'id_vehicule', 'num_veh', 'catv', 'obs', 'obsm', 'motor']
 vehic.drop(columns = vehic.columns.difference(keep3), inplace=True)
+vehic = vehic.fillna('NULL')
 print(vehic.head())
 
 vehic.to_csv("../Fichier/Vehicules.csv", sep=";",)
