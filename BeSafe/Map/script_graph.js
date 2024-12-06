@@ -17,7 +17,9 @@ var chart = new Chart(canvas, {
         datasets: [{
             label: 'Nombre',
             data: [0, 0, 0, 0], // Initialisation avec des valeurs par défaut
-            backgroundColor: ['#4caf50', '#2196f3', '#ff9800', '#f44336']
+            backgroundColor: ['#4cae4f80', '#2094f380', '#ff9800', '#f44336'],
+            borderColor: ['4cae4f','2094f3','ff990080', 'f4403480'],
+            borderWidth: 1
         }]
     },
     options: {

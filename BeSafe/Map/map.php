@@ -266,7 +266,6 @@
                     <option value="crépuscule ou aube">Crépuscule ou aube</option>
                     <option value="nuit avec éclairage public allumé">Nuit avec éclairage public allumé</option>
                     <option value="nuit sans éclairage public">Nuit sans éclairage public</option>
-                    <option value="nuit sans éclairage public non allumé">Nuit sans éclairage public non allumé</option>
                     <option value="plein jour">Plein jour</option>
                 </select>
 
