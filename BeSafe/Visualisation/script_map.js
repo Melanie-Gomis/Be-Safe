@@ -21,13 +21,45 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
 
 // Définir les couleurs par gravité
 const graviteCouleurs = {
-    "blessé léger": "blue",
-    "hospitalisé": "orange",
-    "tué": "red"
+    "blessé léger": '#2094f380',
+    "hospitalisé": '#ff990080',
+    "tué": '#f4403480'
 };
 
 // Ajouter un groupe de clusters
-var markers = L.markerClusterGroup();
+var markers = L.markerClusterGroup({
+    iconCreateFunction: function(cluster) {
+        var n = cluster.getChildCount();
+        var couleur = graviteCouleurs["blessé léger"]; // Valeur par défaut
+
+        // Choisir la couleur en fonction du nombre d'accidents dans le cluster
+        if (n > 100) {
+            couleur = graviteCouleurs["tué"];
+        } else if (n <= 100 && n > 5) {
+            couleur = graviteCouleurs["hospitalisé"];
+        }
+
+        return L.divIcon({
+            html: '<div style="background-color:' + couleur + 
+                '; color: black; border-radius: 50%; text-align: center; ' + 
+                'line-height: 35px; width: 35px; height: 35px; font-size: 12px; ' +
+                'border: 1px solid rgba(' + hexToRgb(couleur).r + ',' + hexToRgb(couleur).g + ',' + hexToRgb(couleur).b + ');">' + n + '</div>',
+            className: 'marker-cluster',
+            iconSize: L.point(30, 30) 
+        });
+    }
+});
+
+// Fonction pour convertir une couleur hexadécimale en RGB
+function hexToRgb(hex) {
+    var r = parseInt(hex.substr(1, 2), 16);
+    var g = parseInt(hex.substr(3, 2), 16);
+    var b = parseInt(hex.substr(5, 2), 16);
+    return { r: r, g: g, b: b };
+}
+
+// Ajouter les marqueurs au cluster
+markers.addTo(map);
 
 // Fonction pour ajouter les marqueurs à la carte en fonction des filtres
 function ajouterMarkers(filtreGravite, filtreAnnee, filtreMois, filtreJour, filtreHeure, filtreRegion, filtreDep, filtremeteo, filtrelum, filtreVehicule) {

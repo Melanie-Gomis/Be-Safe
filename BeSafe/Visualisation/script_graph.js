@@ -17,8 +17,8 @@ var chart = new Chart(canvas, {
         datasets: [{
             label: 'Nombre',
             data: [0, 0, 0, 0], // Initialisation avec des valeurs par défaut
-            backgroundColor: ['#4cae4f80', '#2094f380', '#ff9800', '#f44336'],
-            borderColor: ['4cae4f','2094f3','ff990080', 'f4403480'],
+            backgroundColor: ['#4cae4f80', '#2094f380', '#ff990080', '#f4403480'],
+            borderColor: ['#4cae4f','#2094f3','#ff9800', '#f44336'],
             borderWidth: 1
         }]
     },
@@ -28,7 +28,7 @@ var chart = new Chart(canvas, {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Nombre de personnes selon les blessures'
+                text: 'Nombre de personnes touchées selon les blessures'
             }
         },
         scales: {
@@ -164,14 +164,3 @@ document.getElementById('lumFilter').addEventListener('change', applyFilters);
 // Mettre à jour le graphique avec les données initiales
 updateChart();
 
-console.log('Année sélectionnée:', annee);
-console.log('Mois sélectionné:', mois);
-console.log('Jour sélectionné:', jour);
-console.log('Heure sélectionnée:', heure);
-console.log('Région sélectionnée:', region);
-console.log('Département sélectionné:', departement);
-console.log('Gravité sélectionnée:', gravite);
-console.log('Véhicule sélectionné:', vehicule);
-console.log('Météo sélectionnée:', meteo);
-console.log('Luminosité sélectionnée:', luminosite);
-console.log('Accidents filtrés:', filteredAccidents);

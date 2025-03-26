@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carte des Accidents</title>
-    <link rel="stylesheet" href="../styles/style_map.css" />
+    <title>Visualisation d'accidents</title>
+    <link rel="stylesheet" href="../styles/visu.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
@@ -23,29 +23,27 @@
 
         // Requête SQL pour récupérer les accidents
         $sql = "SELECT * FROM accidents";
-
         $stmt = $bd->prepare($sql);
         $stmt->execute();
         $accidents = $stmt->fetchAll(PDO::FETCH_ASSOC); // tableau interactif
-
         // Convertir les données en JSON pour faciliter les échanges
         $json_accidents = json_encode($accidents);
-
+        
     } catch (PDOException $e) {
         die("Erreur : " . $e->getMessage());
     }
     ?>
 
     <header>
-        <img src="../images/logo.png" alt="Be Safe Logo">
-        <h1>Be safe: Plateforme de Visualisation des Accidents</h1>
+        <img src="../Images/logo.png" alt="Be Safe Logo">
+        <h1>Be safe : Visualisation des accidents</h1>
     </header>
 
     <main>
-        <aside id="filtre">
+        <aside id="filtres">
             <h2>Filtres</h2>
             <form>
-                <label for="anneeFilter">Choisissez l'année :</label>
+                <label for="anneeFilter">Année :</label>
                 <select id="anneeFilter">
                     <option value="tout">Tout</option>
                     <option value="2005">2005</option>
@@ -53,7 +51,7 @@
                     <option value="2015">2015</option>
                 </select>
 
-                <label for="moisFilter">Choisissez le mois :</label>
+                <label for="moisFilter">Mois :</label>
                 <select id="moisFilter">
                     <option value="tout">Tout</option>
                     <option value="1">Janvier</option>
@@ -70,7 +68,7 @@
                     <option value="12">Décembre</option>
                 </select>
 
-                <label for="jourFilter">Choisissez le jour de la semaine :</label>
+                <label for="jourFilter">Jour de la semaine :</label>
                 <select id="jourFilter">
                     <option value="tout">Tout</option>
                     <option value="Lundi">Lundi</option>
@@ -82,7 +80,7 @@
                     <option value="Dimanche">Dimanche</option>
                 </select>
 
-                <label for="heureFilter">Choisissez l'heure :</label>
+                <label for="heureFilter">Heure :</label>
                 <select id="heureFilter">
                     <option value="tout">Tout</option>
                     <option value="00">00:00</option>
@@ -111,7 +109,7 @@
                     <option value="23">23:00</option>
                 </select>
 
-                <label for="regionFilter">Choisissez la région :</label>
+                <label for="regionFilter">Région :</label>
                 <select id="regionFilter">
                     <option value="tout">Tout</option>
                     <option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>
@@ -129,7 +127,7 @@
                     <option value="Provence-Alpes-Côte d'Azur">Provence-Alpes-Côte d'Azur</option>
                 </select>
 
-                <label for="depFilter">Choisissez le département :</label>
+                <label for="depFilter">Département :</label>
                 <select id="depFilter">
                     <option value="tout">Tout</option>
                     <option value="01">Ain</option>
@@ -228,7 +226,7 @@
                     <option value="95">Val-d'Oise</option>
                 </select>
 
-                <label for="graviteFilter">Choisissez la gravité :</label>
+                <label for="graviteFilter">Gravité :</label>
                 <select id="graviteFilter">
                     <option value="tout">Tout</option>
                     <option value="blessé léger">Faible</option>
@@ -236,7 +234,7 @@
                     <option value="tué">Forte</option>
                 </select>
 
-                <label for="vehiculeFilter">Choisissez le type de véhicule :</label>
+                <label for="vehiculeFilter">Type de véhicule :</label>
                 <select id="vehiculeFilter">
                     <option value="tout">Tout</option>
                     <option value="has_voiture">Voiture</option>
@@ -246,7 +244,7 @@
                     <option value="has_poidslourd">Poids lourd</option>
                 </select>
 
-                <label for="meteoFilter">Choisissez la météo :</label>
+                <label for="meteoFilter">Météo :</label>
                 <select id="meteoFilter">
                     <option value="tout">Tout</option>
                     <option value="autre météo">Autre météo</option>
@@ -260,17 +258,17 @@
                     <option value="vent fort - tempête">Vent fort - Tempête</option>
                 </select>
 
-                <label for="lumFilter">Choisissez la luminosité :</label>
+                <label for="lumFilter">Luminosité :</label>
                 <select id="lumFilter">
                     <option value="tout">Tout</option>
                     <option value="crépuscule ou aube">Crépuscule ou aube</option>
                     <option value="nuit avec éclairage public allumé">Nuit avec éclairage public allumé</option>
+                    <option value="nuit avec éclairage public non allumé">Nuit avec éclairage public éteint</option>
                     <option value="nuit sans éclairage public">Nuit sans éclairage public</option>
                     <option value="plein jour">Plein jour</option>
                 </select>
-
-                <a id="lien" href="../index.html">Retour à l'accueil</a>
             </form>
+            <a id ="lien" href="../index.html">Retour à l'accueil</a>
         </aside>
 
         <section id="content">
@@ -280,24 +278,28 @@
                 <div id="legende">
                     <h2>Légende :</h2>
                     <ul>
-                        <li><span class="marker" style="background-color: blue;"></span> Blessé léger</li>
-                        <li><span class="marker" style="background-color: orange;"></span> Hospitalisé</li>
-                        <li><span class="marker" style="background-color: red;"></span> Tué</li>
+                        <li><span class="marker" style="background-color: #2094f380; border-color: #2094f3;"></span> Gravité faible </li>
+                        <li><span class="marker" style="background-color: #ff990080; border-color: #ff9800;"></span> Gravité moyenne </li>
+                        <li><span class="marker" style="background-color: #f4403480; border-color: #f44336;"></span> Gravité forte </li>
                     </ul>
                 </div>
             </div>
 
             <h2>Graphique des statistiques</h2>
             <div id="graph"></div>
+            <div id="graph2"></div>
+            <div id="graph3"></div>
 
-            <script>var accidents = <?php echo $json_accidents; ?>;</script>
+            <script> var accidents = <?php echo $json_accidents; ?>; </script>
             <script src="script_map.js"></script>
             <script src="script_graph.js"></script>
+            <script src="script_graph2.js"></script>
+            <script src="script_graph3.js"></script>
         </section>
     </main>
 
     <footer>
-        <p>© 2024 Visualisation des Accidents. Université Paul Valéry Montpellier 3.</p>
+        <p>© 2024-2025 Be Safe — Université Paul Valéry — Montpellier</p>
     </footer>
 </body>
 </html>
