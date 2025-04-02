@@ -24,4 +24,4 @@ print(acc.head())
 print(acc.shape)
 
 
-acc.to_csv("../Fichier/Accidents_pred2.csv", sep=";")
+acc.to_csv("../Fichier/Accidents_pred.csv", sep=";")
