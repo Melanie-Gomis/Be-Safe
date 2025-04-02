@@ -17,9 +17,6 @@ model_grav= joblib.load('pred_grav.pkl')
 model_nb = joblib.load('pred_nb.pkl')
 le = joblib.load('label_encoder.pkl')
 
-df_tendance = pd.read_csv("tendance.csv", sep=",")
-df_tendance_mois = pd.read_csv("tendance_mois.csv", sep=",")
-
 # Fonction de prétraitement pour la prédiction
 def preprocess_data(data):
     """
@@ -137,18 +134,10 @@ def predict_nb():
         'ANNEE': [data['annee']],
         'mois': [data['mois']],
         'dep': [data['dep']],
-        'tendance': [None],
-        'tendance_mois': [None]
     })
 
     # Encoder le département
     new_data['dep'] = le.transform(new_data['dep'])
-
-    # Trouver les bonnes tendances
-    new_data['tendance'] = df_tendance[df_tendance['dep'] == new_data['dep'].iloc[0]].iloc[0]['tendance']
-    new_data['tendance_mois'] = df_tendance_mois[(df_tendance_mois['dep'] == new_data['dep'].iloc[0]) 
-                            & (df_tendance_mois['mois'] == new_data['mois'].iloc[0])].iloc[0]['tendance_mois']
-
 
     # Faire la prédiction
     prediction = model_nb.predict(new_data)
