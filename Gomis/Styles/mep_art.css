@@ -1,0 +1,62 @@
+*{
+    /* border: 1px dotted #FF0000;  */
+    padding: 0px;
+    margin: 0px;
+    color: rgb(5, 187, 93);
+    background-color: whitesmoke; 
+   
+}
+h1{
+    text-align: center;
+    font: 50px cursive;
+    color: rgb(0, 128, 11);
+}
+a{
+    color: rgb(58, 174, 52);
+    font-style: italic;
+}
+a:hover{
+    color: rgb(39, 133, 45);
+    font-weight: bold;
+}
+body>a:last-child{ 
+    float: right;
+    margin-right: 15px;
+    font-size: 1.25em;
+    clear: both;
+} 
+li{
+    float: left;
+    margin: 10px;
+    width: 45vw; 
+    list-style: none;
+}
+img{
+    width: 100%;
+}
+form{
+    padding-left: 25vw;
+}
+form>p{
+    margin: 5px 0px;
+}
+label{
+    color: rgb(39, 133, 45);
+    display: inline-block;
+    text-align: right;
+    width: 200px;
+}
+input[type=submit]{
+    font-size: 14px;
+    color: rgb(5, 187, 93);
+    display: block;
+    margin-left: 175px;
+    cursor: pointer;
+}
+input[type="number"]{
+    width: 142px; 
+}
+p {
+    display: inline-block;
+    margin-left: 10px;
+}
