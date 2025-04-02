@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Prédiction de Gravité d'Accident</title>
-    <link rel="stylesheet" href="../../../Styles/predi_grav.css" />
+    <link rel="stylesheet" href="../../Styles/predi_grav.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="grav.js"></script>
@@ -11,7 +11,7 @@
 <body>
 
     <header>
-        <img src="../../../Images/logo.png" alt="Be Safe Logo">
+        <img src="../../Images/logo.png" alt="Be Safe Logo">
         <h1>Be safe : Prédiction de la gravité</h1>
     </header>
 
@@ -57,7 +57,7 @@
                 <div>
                     <label for="has_voiture">Une voiture est impliqué ?</label>
                     <select id="has_voiture" name="has_voiture" required>
-                        <option class="attente" disabled selected >Choisir une option</option>
+                        <option class="attente" disabled selected ></option>
                         <option value="0">Oui</option>
                         <option value="1">Non</option>
                     </select>
@@ -66,8 +66,8 @@
                 <!-- Poids lourd impliqué -->
                 <div>
                     <label for="has_poidslourd">Un poids lourd est impliqué ?</label>
-                    <select id="has_poidslourd" name="has_poidslourd">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                    <select id="has_poidslourd" name="has_poidslourd" required>
+                        <option class="attente" disabled selected></option>
                         <option value="0">Oui</option>
                         <option value="1">Non</option>
                     </select>
@@ -76,8 +76,8 @@
                 <!-- Piéton impliqué -->
                 <div>
                     <label for="has_pietons">Un piéton est impliqué ?</label>
-                    <select id="has_pietons" name="has_pietons">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                    <select id="has_pietons" name="has_pietons" required>
+                        <option class="attente" disabled selected></option>
                         <option value="0">Oui</option>
                         <option value="1">Non</option>
                     </select>
@@ -86,8 +86,8 @@
                 <!-- Vélo impliqué -->
                 <div>
                     <label for="has_velo">Un vélo est impliqué ?</label>
-                    <select id="has_velo" name="has_velo">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                    <select id="has_velo" name="has_velo" required>
+                        <option class="attente" disabled selected></option>
                         <option value="0">Oui</option>
                         <option value="1">Non</option>
                     </select>
@@ -103,7 +103,7 @@
                 <div>
                     <label for="lum">Quel est la luminosité ?</label>
                     <select id="lum" name="lum">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                        <option class="attente" disabled selected></option>
                         <option value="plein jour">Plein jour</option>
                         <option value="crépuscule ou aube">Crépuscule ou aube</option>
                         <option value="nuit sans éclairage public">Nuit sans éclairage public</option>
@@ -116,7 +116,7 @@
                 <div>
                     <label for="surf">Quel est la surface de la route ?</label>
                     <select id="surf" name="surf">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                        <option class="attente" disabled selected></option>
                         <option value="surface normale">Normale</option>
                         <option value="surface mouillée">Mouillée</option>
                         <option value="boue">Boueuse</option>
@@ -133,7 +133,7 @@
                 <div>
                     <label for="catr">Quel est le type de route ?</label>
                     <select id="catr" name="catr">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                        <option class="attente" disabled selected></option>
                         <option value="autoroute">Autoroute</option>
                         <option value="route nationale">Route nationale</option>
                         <option value="route départementale">Route départementale</option>
@@ -148,7 +148,7 @@
                 <div>
                     <label for="atm">Quels sont les conditions atmosphériques ?</label>
                     <select id="atm" name="atm">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                        <option class="attente" disabled selected></option>
                         <option value="météo normale">Normale</option>
                         <option value="vent fort - tempête">Vent fort / Tempête</option>
                         <option value="pluie forte">Pluie forte</option>
@@ -165,7 +165,7 @@
                 <div>
                     <label for="col">Quel type de collision s'est produit ?</label>
                     <select id="col" name="col">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                        <option class="attente" disabled selected></option>
                         <option value="2 véhicules côté">2 véhicules côté</option>
                         <option value="2 véhicules frontal">2 véhicules frontal</option>
                         <option value="autre collision">Autre collision</option>
@@ -180,7 +180,7 @@
                 <div>
                     <label for="intersec">Quel est le type de l'intersection ?</label>
                     <select id="intersec" name="intersec">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                        <option class="attente" disabled selected></option>
                         <option value="hors intersection">Hors intersection</option>
                         <option value="intersection en X">Intersection en X</option>
                         <option value="intersection en T">Intersection en T</option>
@@ -197,7 +197,7 @@
                 <div>
                     <label for="agg">Est-ce en agglomération ?</label>
                     <select id="agg" name="agg">
-                        <option class="attente" disabled selected>Choisir une option</option>
+                        <option class="attente" disabled selected></option>
                         <option value="hors agglomération">Oui</option>
                         <option value="en agglomération">Non</option>
                     </select>
@@ -207,8 +207,8 @@
             </form>
 
             <div class="liens">
-                <a href="../../predi.html"> Retour</a>
-                <a href="../../../index.html">Accueil</a>
+                <a href="../predi.html"> Retour</a>
+                <a href="../../index.html">Accueil</a>
             </div>
         </section>
     </main>
@@ -216,5 +216,10 @@
     <footer>
         <p>© 2024-2025 Be Safe — Université Paul Valéry — Montpellier</p>
     </footer>
+
+    <div id="overlay">
+        <div id="avertissement"></div>
+    </div>
+    
 </body>
 </html>

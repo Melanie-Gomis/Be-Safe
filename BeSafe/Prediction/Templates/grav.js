@@ -1,12 +1,28 @@
-
 // Copier les numéros d'urgences
 function copyToClipboard(number) {
     navigator.clipboard.writeText(number)
     .then(() => {
-        alert('Le numéro ' + number + ' a été copié dans le presse-papiers!');
+        avertissement('Le numéro ' + number + ' a été copié dans le presse-papiers.');
     })
     .catch((error) => {
         console.error("Erreur lors de la copie dans le presse-papiers :", error);
+    });
+}
+
+
+// Pour les alert : avertissement
+function avertissement(message){
+    // Récupérer le div de l'avertissement et le fond
+    let avertissementDiv = document.getElementById('avertissement');
+    let overlayDiv = document.getElementById('overlay');
+
+    avertissementDiv.innerHTML = message;
+    avertissementDiv.style.display = 'block';
+    overlayDiv.style.display = 'block';
+    
+    overlayDiv.addEventListener('click', function() {
+        avertissementDiv.style.display = 'none';
+        overlayDiv.style.display = 'none';
     });
 }
 
@@ -51,7 +67,7 @@ window.addEventListener('load', () => {
         },
         (error) => {
             console.error("Erreur de géolocalisation :", error);
-            alert("Impossible d'obtenir la position géographique. L'accident ne sera pas localisé.");
+            avertissement("<p>Impossible d'obtenir la position géographique. </p><p>L'accident ne sera pas localisé.</p>");
         }
     );
 
@@ -63,7 +79,7 @@ window.addEventListener('load', () => {
         let data = Object.fromEntries(formData);
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/predict', {
+            const response = await fetch('http://127.0.0.1:5000/predict_grav', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,6 +91,7 @@ window.addEventListener('load', () => {
             
             let gravite = result.prediction;
 
+            // Afficher les résultats
             document.getElementById("indication").innerHTML =gravite
             console.log(gravite)
             if (gravite == "tué"){

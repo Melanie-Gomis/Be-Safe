@@ -8,6 +8,7 @@
     --base: #ffffff;
     --blanc-casse : #f5f5f5;
     --texte-base :#333;
+    --semi-transparent : #96c6de80;
 }
 
 * {
@@ -32,7 +33,7 @@ header {
     align-items: center;
     background-color: var(--bleu-fonce);
     padding: 1rem;
-    box-shadow: 0 0.2vh 0.4vh var(--ombre-color);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
     position: fixed;
     top: 0;
     width: 100%;
@@ -100,7 +101,7 @@ a:hover {
     background: var(--base);
     border-radius: 10px;
     padding: 3vh;
-    box-shadow: 0 0.4vh 0.6vh var(--ombre-color);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
     overflow: scroll;
     position: sticky;
     top: 15vh;
@@ -119,7 +120,7 @@ ul.emergency-numbers li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0.4vh 0.6vh var(--ombre-color);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
 }
 
 ul.emergency-numbers li:hover {
@@ -154,7 +155,7 @@ ul.emergency-numbers .number {
     border-radius: 10px;
     padding: 3vh;
     top: 15vh;
-    box-shadow: 0 0.4vh 0.6vh var(--ombre-color);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
 }
 
 #content form {
@@ -189,9 +190,12 @@ ul.emergency-numbers .number {
     margin-top: 0.5rem;
     border: 1px solid var(--bordure);
     border-radius: 5px;
-    background-color: var(--ombre-color);
+    background-color: var(--blanc-casse);
     padding-left: 5px;
-    box-shadow: inset 0 -5px 5px var(--blanc-casse);
+    box-shadow: 
+        inset 10px 0 5px -5px var(--ombre-color),
+        inset -10px 0 5px -5px var(--ombre-color),
+        inset 0 10px 5px -5px var(--ombre-color);
 }
 
 #content form input[type="number"]::-webkit-inner-spin-button {
@@ -207,12 +211,10 @@ ul.emergency-numbers .number {
     padding: 1vh 2vw;
     border-radius: 5px;
     font-size: 1rem;
-    box-shadow: 0 0.4vh 0.1vh rgba(0, 0, 0, 0.1);
 }
 
 #content form button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0.6vh 0.2vh rgba(0, 0, 0, 0.1);
     background-color: var(--bleu-fonce);
 }
 
@@ -242,3 +244,35 @@ footer p {
     margin: 0;
 }
 
+
+/* Pour les 'avertissement' (alert) */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--semi-transparent);
+    box-shadow: inset 0 6px 50px var(--texte-base);
+    z-index: 15;
+}
+
+#avertissement {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bleu-marine);
+    box-shadow: 0 6px 50px var(--texte-base);
+    color: white;
+    font-size: 1.5rem; 
+    padding: 20px;
+    border-radius: 10px; 
+    text-align: center;
+    max-width: 80%;
+    max-height: 30%;
+    z-index: 20;
+    cursor: pointer;
+}

@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prédiction d'accident</title>
-    <link rel="stylesheet" href="../../../Styles/predi_nb.css" />
+    <link rel="stylesheet" href="../../Styles/predi_nb.css" />
 </head>
 <body>
 
     <header>
-        <img src="../../../Images/logo.png" alt="Be Safe Logo">
+        <img src="../../Images/logo.png" alt="Be Safe Logo">
         <h1>Be Safe : Prédiction du nombre d'accidents</h1>
     </header>
 
@@ -25,7 +25,7 @@
                 <div>
                     <label for="moisFilter">Mois :</label>
                     <select id="moisFilter" name="mois">
-                        <option class="attente" disabled selected >Choisir une option</option>
+                        <option class="attente" disabled selected ></option>
                         <option value="1">Janvier</option>
                         <option value="2">Février</option>
                         <option value="3">Mars</option>
@@ -44,7 +44,7 @@
                 <div>
                     <label for="depFilter">Département :</label>
                     <select id="depFilter" name="dep">
-                        <option class="attente" disabled selected >Choisir une option</option>
+                        <option class="attente" disabled selected ></option>
                         <option value="01">Ain</option>
                         <option value="02">Aisne</option>
                         <option value="03">Allier</option>
@@ -152,8 +152,8 @@
         </section>
 
         <div class="liens">
-            <a href="../../predi.html"> Retour</a>
-            <a href="../../../index.html">Accueil</a>
+            <a href="../predi.html"> Retour</a>
+            <a href="../../index.html">Accueil</a>
         </div>
     </main>
 
@@ -164,5 +164,9 @@
     
     <script src="pred_nb.js"></script>
 
+    <div id="overlay">
+        <div id="avertissement"></div>
+    </div>
+    
 </body>
 </html>

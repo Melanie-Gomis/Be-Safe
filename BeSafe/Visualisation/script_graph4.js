@@ -16,14 +16,6 @@ const joursMapping = {
     'Dimanche': 7
 };
 
-// Exemple de données d'accidents (à remplacer par tes données réelles)
-const accidents = [
-    { mois: 'Janvier', LIBELLE_JOUR: 'Lundi', lum: 'plein jour', gravite_accident: 'blessé léger' },
-    { mois: 'Février', LIBELLE_JOUR: 'Mardi', lum: 'nuit avec éclairage public allumé', gravite_accident: 'hospitalisé' },
-    { mois: 'Mars', LIBELLE_JOUR: 'Mercredi', lum: 'crépuscule ou aube', gravite_accident: 'tué' },
-    // ...
-];
-
 // Fonction pour agréger les données
 function aggregateData(accidents) {
     return accidents.reduce((acc, accident) => {

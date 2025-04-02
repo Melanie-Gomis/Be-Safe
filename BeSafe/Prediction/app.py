@@ -1,19 +1,33 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import joblib
 import pandas as pd
 from datetime import datetime
 import os
 
-os.chdir('/Applications/MAMP/htdocs/BeSafe/Prediction/Gravite')
+os.chdir('/Applications/MAMP/htdocs/BeSafe/Prediction')
 
-app_grav = Flask(__name__)
-CORS(app_grav, origins='*')
+app = Flask(__name__)
+CORS(app, origins='*')
 
-model = joblib.load('pred_grav.pkl')
+# Importation pour la gravité  : le modèle
+model_grav= joblib.load('pred_grav.pkl')
+
+# Importation pour le nombre : le modèle, le label encoder et les csv 
+model_nb = joblib.load('pred_nb.pkl')
+le = joblib.load('label_encoder.pkl')
+
+df_tendance = pd.read_csv("tendance.csv", sep=",")
+df_tendance_mois = pd.read_csv("tendance_mois.csv", sep=",")
 
 # Fonction de prétraitement pour la prédiction
 def preprocess_data(data):
+    """
+    Entrée : 
+        - data : les données brut issus du formulaire
+    Sortie :
+        - data : les données préparer pour correspondre à ceux qu'attend le modèle de prédiction
+    """
     # Conversion des variables qualitatives en numériques (cat.codes)
     cols_to_convert = ["lum", "agg", "intersec", "atm", "col", "LIBELLE_JOUR", "catr", "surf", "NOM_REG"]
     for col in cols_to_convert:
@@ -60,12 +74,12 @@ def preprocess_data(data):
 
     return data
 
-@app_grav.route('/', methods=['POST'])
+@app.route('/', methods=['POST'])
 def index():
     return render_template('index.html', prediction=None)
 
-@app_grav.route('/predict', methods=['POST'])
-def predict():
+@app.route('/predict_grav', methods=['POST'])
+def predict_grav():
     try:
         data = request.get_json()
         processed_data = preprocess_data(data)
@@ -101,7 +115,7 @@ def predict():
             2: "tué"
         }
 
-        prediction = model.predict(new_data)[0]
+        prediction = model_grav.predict(new_data)[0]
         label = gravite_labels.get(prediction, "Inconnu")
         print(prediction, " : \t ", label)
 
@@ -113,7 +127,33 @@ def predict():
     except Exception as e:
         print(f"Erreur lors de la prédiction : {e}")
         return jsonify({'error': str(e)})
-    
+
+@app.route('/predict_nb', methods=['POST'])
+def predict_nb():
+    data = request.get_json()
+
+    # Préparer les données pour la prédiction
+    new_data = pd.DataFrame({
+        'ANNEE': [data['annee']],
+        'mois': [data['mois']],
+        'dep': [data['dep']],
+        'tendance': [None],
+        'tendance_mois': [None]
+    })
+
+    # Encoder le département
+    new_data['dep'] = le.transform(new_data['dep'])
+
+    # Trouver les bonnes tendances
+    new_data['tendance'] = df_tendance[df_tendance['dep'] == new_data['dep'].iloc[0]].iloc[0]['tendance']
+    new_data['tendance_mois'] = df_tendance_mois[(df_tendance_mois['dep'] == new_data['dep'].iloc[0]) 
+                            & (df_tendance_mois['mois'] == new_data['mois'].iloc[0])].iloc[0]['tendance_mois']
+
+
+    # Faire la prédiction
+    prediction = model_nb.predict(new_data)
+    prediction = max(round(prediction[0]), 0)
+    return jsonify({'prediction': prediction})
 
 if __name__ == '__main__':
-    app_grav.run(debug=True)
+    app.run(debug=True)

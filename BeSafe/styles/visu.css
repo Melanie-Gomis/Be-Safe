@@ -28,7 +28,7 @@ header {
     background-color: var(--bleu-fonce);
     color: var(--base);
     padding: 1rem;
-    box-shadow: 0 0.2vh 0.4vh var(--ombre-color);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
     position: fixed;
     top: 0;
     width: 100%;
@@ -69,7 +69,7 @@ aside#filtres {
     background: var(--base);
     border-radius: 10px;
     padding: 3vh;
-    box-shadow: 0 0.4vh 0.6vh var(--ombre-color);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
     max-width: 15vw;
     height: 90vh;
     overflow: scroll;
@@ -121,7 +121,7 @@ section#content {
     border-radius: 10px;
     padding: 3vh;
     top: 15vh;
-    box-shadow: 0 0.4vh 0.6vh var(--ombre-color);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
 }
 
 #carte {

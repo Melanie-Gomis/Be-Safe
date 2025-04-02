@@ -1,10 +1,26 @@
 
+// Pour les alert : avertissement
+function avertissement(message){
+    // Récupérer le div de l'avertissement et le fond
+    let avertissementDiv = document.getElementById('avertissement');
+    let overlayDiv = document.getElementById('overlay');
+
+    avertissementDiv.textContent = message;
+    avertissementDiv.style.display = 'block';
+    overlayDiv.style.display = 'block';
+    
+    overlayDiv.addEventListener('click', function() {
+        avertissementDiv.style.display = 'none';
+        overlayDiv.style.display = 'none';
+    });
+}
+
 // Ajoute un écouteur d'événement pour la soumission du formulaire
 document.getElementById("accident-form").addEventListener("submit", async (e) => {
     e.preventDefault(); // Empêche le comportement par défaut du formulaire
     
     function select_valide(champs){
-        if (champs=== "" || champs === "Choisir une option") {
+        if (champs=== "") {
             return false;
         }
         return true;
@@ -29,12 +45,12 @@ document.getElementById("accident-form").addEventListener("submit", async (e) =>
 
     // Vérification des champs
     if (!select_valide(mois) || !select_valide(dep)) {
-        alert("Merci de remplir tous les champs.");
+        avertissement("Merci de remplir tous les champs.");
         return;
     }
 
     if (!input_valide(annee)){
-        alert("Merci de mettre un entier entre 2000 et 9999.");
+        avertissement("Merci de mettre un entier entre 2000 et 9999.");
         return;
     }
 
@@ -62,7 +78,7 @@ document.getElementById("accident-form").addEventListener("submit", async (e) =>
         const result = await response.json();
         if (result.error) {
             console.error("Erreur :", result.error);
-            alert(`Erreur : ${result.error}`);
+            avertissement(`Erreur : ${result.error}`);
         } else {
             // Affiche la prédiction dans la console et dans une alerte
             console.log("Prédiction :", result.prediction);

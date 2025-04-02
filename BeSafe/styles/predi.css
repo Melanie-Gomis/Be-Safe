@@ -35,7 +35,7 @@ header {
     text-align: center;
     padding: 2vh 2vw;
     background-color: var(--bleu-fonce);
-    box-shadow: 0 0.4vh 0.1vh rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
     width: 100%;
     position: fixed;
     top: 0;
@@ -80,14 +80,14 @@ section {
     border-radius: 1vw;
     padding: 2vw;
     margin: 2vw;
-    box-shadow: 0 0.4vh 0.1vh rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 47%;
 }
 
 section:hover {
     transform: scale(1.05);
-    box-shadow: 0 0.6vh 0.2vh rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px 1px var(--ombre-color);
 }
 
 #accueil {
@@ -98,35 +98,13 @@ h2 {
     color: var(--bleu-fonce);
     font-size: 1.5rem;
     margin-bottom: 1.5vh;
+    text-align: center;
 }
-
-/* 
-#visu {
-    width: 100%;
-    height: 45vh;
-    margin-bottom: 0.2vh;
-    border-radius: 1vw;
-    background-color: var(--base);
-    background-image: url('../Images/carte.png'); 
-    background-size: cover; 
-    background-position: center; 
-}
-
-#predi {
-    width: 100%;
-    height: 45vh;
-    background-color: var(--base);
-    margin-bottom: 0.2vh;
-    border-radius: 1vw;
-    background-image: url('../Images/mise_a_jour.png'); 
-    background-size: cover; 
-    background-position: center; 
-} */
 
 
 /* Liens */
 a {
-    display: inline-block;
+    display: block;
     background-color: var(--bleu-fonce);
     color: var(--base);
     padding: 2vh 2vw;
@@ -136,7 +114,7 @@ a {
     text-align: center;
     transition: background-color 0.3s, transform 0.2s ease-in-out;
     margin-top: 3vh;
-    width: auto;
+    margin-left: auto;
 }
 
 a:hover {
